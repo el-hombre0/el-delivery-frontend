@@ -1,4 +1,4 @@
-export const NavBar = () => {
+export const Header = () => {
   return (
     <>
       <div className="container">
@@ -21,7 +21,7 @@ export const NavBar = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link">
+                <a href="/features" className="nav-link">
                   Особенности
                 </a>
               </li>

@@ -1,7 +1,20 @@
 import { useEffect, useState } from "react";
 import { listOrders } from "../../services/OrderService";
+interface Order {
+  id: number;
+  clientName: string;
+  clientSurname: string;
+  clientPhone: string;
+  clientEmail: string;
+  carModel: string;
+  requiredKiloWatts: number;
+  distanceToClient: number;
+  address: string;
+  cost: number;
+  paymentMethod: string;
+}
 export const Orders = () => {
-  const [ordersList, setOrdersList] = useState<any[]>([]);
+  const [ordersList, setOrdersList] = useState<Order[]>([]);
   useEffect(() => {
     listOrders()
       .then((resp) => {
@@ -56,7 +69,6 @@ export const Orders = () => {
                 <td>{order.clientPhone}</td>
                 <td>{order.clientEmail}</td>
                 <td>{order.carModel}</td>
-                <td>{order.clientPhone}</td>
                 <td>{order.requiredKiloWatts}</td>
                 <td>{order.distanceToClient}</td>
                 <td>{order.address}</td>
