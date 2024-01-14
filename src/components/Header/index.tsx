@@ -44,12 +44,12 @@ export const Header = () => {
           </nav>
           <div className="col-md-3 text-end">
             <button type="button" className="btn btn-outline-primary me-2">
-              <a href="/auth" className="nav-link">
+              <a href="/login" className="nav-link">
                 Войти
               </a>
             </button>
             <button type="button" className="btn btn-primary">
-              <a href="/reg" className="nav-link">
+              <a href="/register" className="nav-link">
                 Зарегистрироваться
               </a>
             </button>
