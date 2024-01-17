@@ -62,7 +62,7 @@ export default class LoginForm extends React.Component<MyProps, MyState> {
     return (
       <>
         <h3 className="text-center">Авторизация</h3>
-        <div className="container mw-25">
+        <div className="container w-25">
           <form onSubmit={this.onSubmitLogin}>
             <div className="form-group mb-1 p-2">
               <label className="form-label" htmlFor="loginInput">Логин</label>
@@ -71,7 +71,7 @@ export default class LoginForm extends React.Component<MyProps, MyState> {
                 type="text"
                 className="form-control"
                 id="loginInput"
-                placeholder="E-mail/номер телефона"
+                placeholder="E-mail"
                 required
                 autoFocus
                 onChange={this.onChangeHandler}
