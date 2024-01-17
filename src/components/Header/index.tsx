@@ -1,57 +1,58 @@
+import { Link } from "react-router-dom";
 export const Header = () => {
   return (
     <>
       <div className="container">
         <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
           >
             <svg className="bi me-2" width="40" height="32">
               {/* <use xlink:href="#bootstrap"></use> */}
             </svg>
             <span className="fs-4">El-Delivery</span>
-          </a>
+          </Link>
 
           <nav>
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <a href="/" className="nav-link active" aria-current="page">
+                <Link to="/" className="nav-link active" aria-current="page">
                   Главная
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/features" className="nav-link">
+                <Link to="/features" className="nav-link">
                   Особенности
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/pricing" className="nav-link">
+                <Link to="/pricing" className="nav-link">
                   Цены
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/faqs" className="nav-link">
+                <Link to="/faqs" className="nav-link">
                   FAQs
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/about" className="nav-link">
+                <Link to="/about" className="nav-link">
                   О нас
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
           <div className="col-md-3 text-end">
             <button type="button" className="btn btn-outline-primary me-2">
-              <a href="/login" className="nav-link">
+              <Link to="/login" className="nav-link">
                 Войти
-              </a>
+              </Link>
             </button>
             <button type="button" className="btn btn-primary">
-              <a href="/register" className="nav-link">
+              <Link to="/register" className="nav-link">
                 Зарегистрироваться
-              </a>
+              </Link>
             </button>
           </div>
         </header>
