@@ -1,103 +1,70 @@
-import * as React from "react";
-type MyProps = {
-  onLogin: any;
-  onRegister: any;
+import { useForm } from "react-hook-form";
+import { fetchAuth } from "../../redux/slices/auth";
+import { useAppDispatch } from "../../hooks/useTypedDispatch";
+
+export const LoginForm = () => {
+  const dispatch = useAppDispatch();
+
+  const onSubmit = (values: any) => {
+    console.log(values);
+    dispatch(fetchAuth(values));
+  };
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      email: "stas@mail.ru",
+      password: "1234ASD",
+    },
+    mode: "onChange",
+  });
+  return (
+    <>
+      <h3 className="text-center">Авторизация</h3>
+      <div className="container w-25">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-group mb-1 p-2">
+            <label className="form-label" htmlFor="loginInput">
+              Логин
+            </label>
+
+            <input
+              type="email"
+              className="form-control"
+              id="loginInput"
+              {...register("email", { required: "Укажите Ваш E-mail" })}
+              placeholder="E-mail"
+              required
+              autoFocus
+            />
+          </div>
+
+          <div className="form-group mb-2 p-2">
+            <label className="form-label" htmlFor="passwordInput">
+              Пароль
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="passwordInput"
+              {...register("password", { required: "Укажите Ваш пароль" })}
+              placeholder="Пароль"
+              required
+            />
+          </div>
+          <div className="form-group mb-2 p-2">
+            <button type="submit" className="btn btn-primary">
+              Войти
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
 };
 
-type MyState = {
-  active: string;
-  firstName: string;
-  lastName: string;
-  login: string;
-  password: string;
-  onLogin: any;
-  onRegister: any;
-  [key: string]: any;
-
-};
-
-// interface IState {
-//   [key: string]: any;
-// }
-
-export default class LoginForm extends React.Component<MyProps, MyState> {
-  constructor(props: MyProps) {
-    super(props);
-    this.state = {
-      active: "login",
-      firstName: "",
-      lastName: "",
-      login: "",
-      password: "",
-
-      // Флаги для скрытия формы после авторизации
-      onLogin: props.onLogin,
-      onRegister: props.onRegister,
-    };
-  }
-
-  // Обработчик изменений в полях формы
-  onChangeHandler = (event: any) => {
-    let name = event.target.name;
-    let value = event.target.value;
-    // const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  onSubmitLogin = (e: any) => {
-    this.state.onLogin(e, this.state.login, this.state.password);
-  };
-
-  onSubmitRegister = (e: any) => {
-    this.state.onRegister(
-      e,
-      this.state.firstName,
-      this.state.lastName,
-      this.state.login,
-      this.state.password
-    );
-  };
-
-  render() {
-    return (
-      <>
-        <h3 className="text-center">Авторизация</h3>
-        <div className="container w-25">
-          <form onSubmit={this.onSubmitLogin}>
-            <div className="form-group mb-1 p-2">
-              <label className="form-label" htmlFor="loginInput">Логин</label>
-
-              <input
-                type="text"
-                className="form-control"
-                id="loginInput"
-                placeholder="E-mail"
-                required
-                autoFocus
-                onChange={this.onChangeHandler}
-              />
-            </div>
-
-            <div className="form-group mb-2 p-2">
-              <label className="form-label" htmlFor="passwordInput">Пароль</label>
-              <input
-                type="text"
-                className="form-control"
-                id="passwordInput"
-                placeholder="Пароль"
-                required
-                onChange={this.onChangeHandler}
-
-              />
-            </div>
-            <div className="form-group mb-2 p-2">
-              <button type="submit" className="btn btn-primary">
-                Войти
-              </button>
-            </div>
-          </form>
-        </div>
-      </>
-    );
-  }
-}
+export default LoginForm;
