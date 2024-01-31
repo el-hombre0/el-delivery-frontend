@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
-import { fetchAuth } from "../../redux/slices/auth";
+import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
+  const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = (values: any) => {
     console.log(values);
@@ -22,6 +25,9 @@ export const LoginForm = () => {
     },
     mode: "onChange",
   });
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <h3 className="text-center">Авторизация</h3>

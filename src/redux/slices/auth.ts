@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../services/axios_helper";
+import { useNavigate } from "react-router-dom";
 
 export const fetchAuth = createAsyncThunk(
   "auth/fetchAuth",
@@ -18,7 +19,11 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.data = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAuth.pending, (state) => {
@@ -36,4 +41,7 @@ const authSlice = createSlice({
   },
 });
 
+// Проверка авторизован ли пользователь
+export const selectIsAuth = (state: any) => Boolean(state.auth.data);
 export const authReducer = authSlice.reducer;
+export const { logout } = authSlice.actions;

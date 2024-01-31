@@ -1,5 +1,17 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { selectIsAuth } from "../../redux/slices/auth";
+import { logout } from "../../redux/slices/auth";
+import { useAppDispatch } from "../../hooks/useTypedDispatch";
+
 export const Header = () => {
+  const isAuth = useSelector(selectIsAuth);
+  const dispatch = useAppDispatch();
+  const onClickLogout = () => {
+    if (window.confirm("Вы уверены, что хотите выйти?")) {
+      dispatch(logout());
+    }
+  };
   return (
     <>
       <div className="container">
@@ -44,16 +56,30 @@ export const Header = () => {
             </ul>
           </nav>
           <div className="col-md-3 text-end">
-            <button type="button" className="btn btn-outline-primary me-2">
-              <Link to="/login" className="nav-link">
-                Войти
-              </Link>
-            </button>
-            <button type="button" className="btn btn-primary">
-              <Link to="/register" className="nav-link">
-                Зарегистрироваться
-              </Link>
-            </button>
+            {!isAuth ? (
+              <>
+                <button type="button" className="btn btn-outline-primary me-2">
+                  <Link to="/login" className="nav-link">
+                    Войти
+                  </Link>
+                </button>
+                <button type="button" className="btn btn-primary">
+                  <Link to="/register" className="nav-link">
+                    Зарегистрироваться
+                  </Link>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={onClickLogout}
+                  type="button"
+                  className="btn btn-outline-danger me-2"
+                >
+                  Выйти
+                </button>
+              </>
+            )}
           </div>
         </header>
       </div>
