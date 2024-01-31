@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import { selectIsAuth } from "../../redux/slices/auth";
 import { logout } from "../../redux/slices/auth";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
+import Cookies from "universal-cookie";
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useAppDispatch();
+  const cookies = new Cookies();
   const onClickLogout = () => {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
       dispatch(logout());
+      cookies.remove('token');
     }
   };
   return (

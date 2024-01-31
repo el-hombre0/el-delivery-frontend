@@ -3,14 +3,25 @@ import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
   const isAuth = useSelector(selectIsAuth);
+  const cookies = new Cookies();
 
-  const onSubmit = (values: any) => {
-    console.log(values);
-    dispatch(fetchAuth(values));
+  const onSubmit = async (values: any) => {
+    const data = await dispatch(fetchAuth(values));
+    if (!data.payload || !("token" in data.payload)) {
+      alert("Не удалось авторизоваться! Повторите попытку.");
+    } else {
+      const decoded: any = jwtDecode(data.payload.token);
+      console.log(decoded);
+      cookies.set("token", data.payload.token, {
+        expires: new Date(decoded.exp * 1000),
+      });
+    }
   };
 
   const {

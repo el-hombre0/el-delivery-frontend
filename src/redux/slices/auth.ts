@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../services/axios_helper";
-import { useNavigate } from "react-router-dom";
 
 export const fetchAuth = createAsyncThunk(
   "auth/fetchAuth",
