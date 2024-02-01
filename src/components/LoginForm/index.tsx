@@ -41,12 +41,12 @@ export const LoginForm = () => {
   }
   return (
     <>
-      <h3 className="text-center">Авторизация</h3>
+      <h3 className="text-center">Аутентификация</h3>
       <div className="container w-25">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group mb-1 p-2">
             <label className="form-label" htmlFor="loginInput">
-              Логин
+              Логин(e-mail)
             </label>
 
             <input
