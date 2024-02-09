@@ -1,29 +1,20 @@
-import { useEffect, useState } from "react";
-import { listOrders } from "../../services/OrderService";
-interface Order {
-  id: number;
-  clientName: string;
-  clientSurname: string;
-  clientPhone: string;
-  clientEmail: string;
-  carModel: string;
-  requiredKiloWatts: number;
-  distanceToClient: number;
-  address: string;
-  cost: number;
-  paymentMethod: string;
-}
+import { useEffect } from "react";
+import { fetchOrders } from "../../services/OrderService";
+import { useAppDispatch } from "../../hooks/useTypedDispatch";
+import { useSelector } from "react-redux";
+import { selectIsAuth } from "../../redux/slices/auth";
+import { IOrder } from "../../types/order.types";
+
 export const Orders = () => {
-  const [ordersList, setOrdersList] = useState<Order[]>([]);
+  const dispatch = useAppDispatch();
+  const isAuth = useSelector(selectIsAuth);
+  const ordersList = useSelector((state: any) => state.orders.orders);
   useEffect(() => {
-    listOrders()
-      .then((resp) => {
-        setOrdersList(resp.data);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    dispatch(fetchOrders());
   }, []);
+
+  const isOrdersLoading = ordersList.status === "loading";
+  const isOrdersError = ordersList.status === "error" && !isAuth;
   // const orderList = [
   //   {
   //     id: 0,
@@ -37,9 +28,8 @@ export const Orders = () => {
   //     address: "Three st., b. 8",
   //     cost: 11600.0,
   //     paymentMethod: "cash",
-  //   }
+  //   },
   // ];
-
   return (
     <>
       <div className="container">
@@ -61,21 +51,25 @@ export const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {ordersList.map((order) => (
-              <tr key={order.id}>
-                <td>{order.id}</td>
-                <td>{order.clientName}</td>
-                <td>{order.clientSurname}</td>
-                <td>{order.clientPhone}</td>
-                <td>{order.clientEmail}</td>
-                <td>{order.carModel}</td>
-                <td>{order.requiredKiloWatts}</td>
-                <td>{order.distanceToClient}</td>
-                <td>{order.address}</td>
-                <td>{order.cost}</td>
-                <td>{order.paymentMethod}</td>
-              </tr>
-            ))}
+            {isOrdersError
+              ? alert("Ошибка загрузки заказов, авторизируйтесь!")
+              : isOrdersLoading
+              ? [...Array(5)]
+              : ordersList.items.map((order: IOrder) => (
+                  <tr key={order.id}>
+                    <td>{order.id}</td>
+                    <td>{order.clientName}</td>
+                    <td>{order.clientSurname}</td>
+                    <td>{order.clientPhone}</td>
+                    <td>{order.clientEmail}</td>
+                    <td>{order.carModel}</td>
+                    <td>{order.requiredKiloWatts}</td>
+                    <td>{order.distanceToClient}</td>
+                    <td>{order.address}</td>
+                    <td>{order.cost}</td>
+                    <td>{order.paymentMethod}</td>
+                  </tr>
+                ))}
             <tr></tr>
           </tbody>
         </table>

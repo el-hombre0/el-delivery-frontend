@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import { selectIsAuth, fetchRegister } from "../../redux/slices/auth";
 import { jwtDecode } from "jwt-decode";
 import { useForm } from "react-hook-form";
+import { Navigate } from "react-router-dom";
 
 export const Registration = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +39,9 @@ export const Registration = () => {
     },
     mode: "onChange",
   });
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <h3 className="text-center">Регистрация</h3>

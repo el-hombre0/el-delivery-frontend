@@ -7,12 +7,15 @@ import Cookies from "universal-cookie";
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
+  // const userName = useSelector((state: any) => {
+  //   state.auth.data.firstName;
+  // });
   const dispatch = useAppDispatch();
   const cookies = new Cookies();
   const onClickLogout = () => {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
       dispatch(logout());
-      cookies.remove('token');
+      cookies.remove("token");
     }
   };
   return (
@@ -74,6 +77,17 @@ export const Header = () => {
               </>
             ) : (
               <>
+                <div>
+                  Здравствуйте,
+                  <button>
+                    <Link to="/account">Имя Пользователя</Link>
+                  </button>
+                </div>
+                <div>
+                  <button>
+                    <Link to="/orders">Заказы</Link>
+                  </button>
+                </div>
                 <button
                   onClick={onClickLogout}
                   type="button"
