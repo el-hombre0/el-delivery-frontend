@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Registration, Orders, Main, Header, Footer } from "./components";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./components/Login";
 
 function App() {
   return (

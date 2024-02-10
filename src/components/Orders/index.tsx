@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchOrders } from "../../services/OrderService";
+import { fetchOrders } from "../../redux/slices/order";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/auth";

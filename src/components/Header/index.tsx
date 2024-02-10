@@ -1,12 +1,14 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectIsAuth } from "../../redux/slices/auth";
+import { selectIsAuth, selectUserData } from "../../redux/slices/auth";
 import { logout } from "../../redux/slices/auth";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
 import Cookies from "universal-cookie";
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
+  const userData = useSelector(selectUserData);
+  console.log(userData);
   // const userName = useSelector((state: any) => {
   //   state.auth.data.firstName;
   // });
@@ -59,12 +61,21 @@ export const Header = () => {
                   О нас
                 </Link>
               </li>
+              {isAuth && userData.role !== "USER" ? (
+                <li>
+                  <Link to="/orders" className="nav-link">
+                    Заказы
+                  </Link>
+                </li>
+              ) : (
+                <></>
+              )}
             </ul>
           </nav>
           <div className="col-md-3 text-end">
             {!isAuth ? (
               <>
-                <button type="button" className="btn btn-outline-primary me-2">
+                <button type="button" className="btn btn-outline-primary m-2">
                   <Link to="/login" className="nav-link">
                     Войти
                   </Link>
@@ -79,15 +90,11 @@ export const Header = () => {
               <>
                 <div>
                   Здравствуйте,
-                  <button>
-                    <Link to="/account">Имя Пользователя</Link>
+                  <button type="button" className="btn btn-light m-2">
+                    <Link to="/account">{userData.firstName}</Link>
                   </button>
                 </div>
-                <div>
-                  <button>
-                    <Link to="/orders">Заказы</Link>
-                  </button>
-                </div>
+
                 <button
                   onClick={onClickLogout}
                   type="button"

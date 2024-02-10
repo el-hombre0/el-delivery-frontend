@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import instance from "./axios_helper";
+import instance from "../../services/axios_helper";
 import Cookies from "universal-cookie";
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
