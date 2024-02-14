@@ -4,3 +4,4 @@ export * from "./Main";
 export * from "./Header";
 export * from "./Footer";
 export * from "./Orders";
+export * from "./OneOrder"

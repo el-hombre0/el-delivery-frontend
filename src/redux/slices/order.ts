@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
   const cookies = new Cookies();
   const token = cookies.get("token");
-  const { data } = await instance.get("/api/orders", {
+  const { data } = await instance.get("/orders", {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;

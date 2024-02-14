@@ -5,7 +5,7 @@ export const fetchAuth = createAsyncThunk(
   "auth/fetchAuth",
   async (params: any) => {
     // Логин и пароль
-    const { data } = await instance.post("/api/v1/auth/authenticate", params);
+    const { data } = await instance.post("/auth/authenticate", params);
     console.log(data);
     return data; // Объект с информациоей о пользователе
   }
@@ -13,7 +13,7 @@ export const fetchAuth = createAsyncThunk(
 export const fetchRegister = createAsyncThunk(
   "auth/fetchRegister",
   async (params: any) => {
-    const { data } = await instance.post("/api/v1/auth/register", params);
+    const { data } = await instance.post("/auth/register", params);
     console.log(data);
     return data; // Объект с информациоей о пользователе
   }

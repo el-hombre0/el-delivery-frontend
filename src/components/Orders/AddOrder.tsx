@@ -1,26 +1,41 @@
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/auth";
+import { useState } from "react";
+import instance from "../../services/axios_helper";
+import { useNavigate } from "react-router-dom";
 
 export const AddOrder = () => {
   const isAuth = useSelector(selectIsAuth);
-
+  const [isLoading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      clientName: "",
-      clientSurname: "",
-      clientPhone: "",
-      clientEmail: "",
-      carModel: "",
-      requiredKiloWatts: 0,
-      distanceToClient: 0,
-      address: "",
-      cost: 0,
+      clientName: "Сергей",
+      clientSurname: "Осипов",
+      clientPhone: "89997771144",
+      clientEmail: "osipov@mail.ru",
+      carModel: "Tesla Model S",
+      requiredKiloWatts: 30.0,
+      distanceToClient: 19.5,
+      address: "Vladivostok, Lenina st., b. 9",
+      cost: 5900.0,
       paymentMethod: "",
     },
     mode: "onChange",
   });
-  const onSubmit = () => {};
+  const navigate = useNavigate();
+  const onSubmit = async (values: any) => {
+    try {
+      setLoading(true);
+      const { data } = await instance.post("/neworder", values);
+      console.log("data", data);
+      const id = data.id;
+      navigate(`/orders/${id}`);
+    } catch (error) {
+      console.warn(error);
+      alert("Ошибка при создании заказа!");
+    }
+  };
   return (
     <div className="addOrder">
       <h2>Создать заказ</h2>
