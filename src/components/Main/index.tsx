@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import useGeolocation from "../../hooks/useGeolocation";
 import { AddOrder } from "../Orders/AddOrder";
+import { selectIsAuth } from "../../redux/slices/auth";
 export const Main = () => {
   const location = useGeolocation();
+  const isAuth = useSelector(selectIsAuth);
 
   return (
     <>
@@ -9,7 +12,7 @@ export const Main = () => {
       {location.loaded
         ? JSON.stringify(location)
         : "Location data is not available yet."}
-      <AddOrder/>
+      {isAuth && <AddOrder/>}
       <div className="d-flex">
         <button type="button" className="btn btn-secondary">
           Закрыть

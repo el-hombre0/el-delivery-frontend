@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import instance from "../../services/axios_helper";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/useTypedDispatch";
+import getToken from "../../services/getToken";
 
 export const AddOrder = () => {
   const isAuth = useSelector(selectIsAuth);
+  const orderData = useSelector((state: any) => state.orders.orders);
+  const dispatch = useAppDispatch();
   const [isLoading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -27,9 +31,16 @@ export const AddOrder = () => {
   const onSubmit = async (values: any) => {
     try {
       setLoading(true);
-      const { data } = await instance.post("/neworder", values);
-      console.log("data", data);
+
+      //TODO сделать отправку данных через fetch
+      const token = getToken();
+      console.log("token:",token);
+      const { data } = await instance.post("/orders", values, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("sended order data:",data);
       const id = data.id;
+      console.log("id:",id)
       navigate(`/orders/${id}`);
     } catch (error) {
       console.warn(error);
