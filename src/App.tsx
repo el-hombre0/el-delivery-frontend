@@ -1,5 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Registration, Orders, Main, Header, Footer, FullOrder, Profile } from "./components";
+import {
+  Registration,
+  Orders,
+  Main,
+  Header,
+  Footer,
+  CompletedOrder,
+  Profile,
+} from "./components";
 import LoginForm from "./components/Login";
 
 function App() {
@@ -11,7 +19,7 @@ function App() {
         <Route path="register" element={<Registration />}></Route>
         <Route path="login" element={<LoginForm />}></Route>
         <Route path="orders" element={<Orders />}></Route>
-        <Route path="orders/:id" element={<FullOrder />}></Route>
+        <Route path="orders/:id" element={<CompletedOrder />}></Route>
         <Route path="profile" element={<Profile />}></Route>
       </Routes>
       <Footer />
