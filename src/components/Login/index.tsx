@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { jwtDecode } from "jwt-decode";
 
-export const LoginForm = () => {
+export const Login = () => {
   const dispatch = useAppDispatch();
   const isAuth = useSelector(selectIsAuth);
   const cookies = new Cookies();
@@ -83,5 +83,3 @@ export const LoginForm = () => {
     </>
   );
 };
-
-export default LoginForm;

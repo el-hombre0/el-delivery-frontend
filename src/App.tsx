@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Registration,
+  Login,
   Orders,
   Main,
   Header,
   Footer,
   CompletedOrder,
-  Profile,
+  Account,
 } from "./components";
-import LoginForm from "./components/Login";
 
 function App() {
   return (
@@ -17,10 +17,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="register" element={<Registration />}></Route>
-        <Route path="login" element={<LoginForm />}></Route>
+        <Route path="login" element={<Login />}></Route>
         <Route path="orders" element={<Orders />}></Route>
         <Route path="orders/:id" element={<CompletedOrder />}></Route>
-        <Route path="profile" element={<Profile />}></Route>
+        <Route path="account" element={<Account />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
