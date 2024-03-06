@@ -13,6 +13,17 @@ export const fetchUserData = createAsyncThunk(
   }
 );
 
+export const updateUserData = createAsyncThunk(
+  "auth/updateUserData",
+  async (values: any) => {
+    const token = getToken();
+    const { data } = await instance.put("/auth/me", values, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return data;
+  }
+);
+
 const initialState = {
   userData: {
     items: [],
@@ -35,6 +46,19 @@ const userDataSlice = createSlice({
         state.userData.items = action.payload;
       })
       .addCase(fetchUserData.rejected, (state) => {
+        state.userData.status = "error";
+        state.userData.items = [];
+      })
+
+      .addCase(updateUserData.pending, (state) => {
+        state.userData.status = "loading";
+        state.userData.items = [];
+      })
+      .addCase(updateUserData.fulfilled, (state, action) => {
+        state.userData.status = "loaded";
+        state.userData.items = action.payload;
+      })
+      .addCase(updateUserData.rejected, (state) => {
         state.userData.status = "error";
         state.userData.items = [];
       });
