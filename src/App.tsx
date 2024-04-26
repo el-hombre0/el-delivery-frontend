@@ -8,6 +8,8 @@ import {
   Footer,
   CompletedOrder,
   Account,
+  MyOrders,
+  UsersList,
 } from "./components";
 
 function App() {
@@ -20,7 +22,9 @@ function App() {
         <Route path="login" element={<Login />}></Route>
         <Route path="orders" element={<Orders />}></Route>
         <Route path="orders/:id" element={<CompletedOrder />}></Route>
+        <Route path="myorders" element={<MyOrders />}></Route>
         <Route path="account" element={<Account />}></Route>
+        <Route path="users-list" element={<UsersList />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

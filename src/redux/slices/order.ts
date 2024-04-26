@@ -28,7 +28,13 @@ export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
 //     return data;
 //   }
 // );
-
+export const fetchMyOrders = createAsyncThunk("orders/fetchMyOrders", async (userId) => {
+  const token = getToken();
+  const { data } = await instance.get("/orders/user/" + userId, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return data;
+});
 const initialState = {
   orders: {
     items: [],
@@ -53,8 +59,21 @@ const ordersSlice = createSlice({
       .addCase(fetchOrders.rejected, (state) => {
         state.orders.status = "error";
         state.orders.items = [];
+      })
+      .addCase(fetchMyOrders.pending, (state) => {
+        state.orders.status = "loading";
+        state.orders.items = [];
+      })
+      .addCase(fetchMyOrders.fulfilled, (state, action) => {
+        state.orders.status = "loaded";
+        state.orders.items = action.payload;
+      })
+      .addCase(fetchMyOrders.rejected, (state) => {
+        state.orders.status = "error";
+        state.orders.items = [];
       });
   },
 });
 
 export const ordersReducer = ordersSlice.reducer;
+export const myOrdersReducer = ordersSlice.reducer;

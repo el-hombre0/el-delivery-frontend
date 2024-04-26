@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../../services/axios_helper";
+import getToken from "../../services/getToken";
 
 export const fetchAuth = createAsyncThunk(
   "auth/fetchAuth",
   async (params: any) => {
     // Логин и пароль
     const { data } = await instance.post("/auth/authenticate", params);
-    console.log(data);
     return data; // Объект с информациоей о пользователе
   }
 );
@@ -17,9 +17,20 @@ export const fetchRegister = createAsyncThunk(
     return data; // Объект с информациоей о пользователе
   }
 );
+export const fetchAllUsers = createAsyncThunk(
+  "auth/fetchAllUsers",
+  async () => {
+    const token = getToken();
+    const { data } = await instance.get("/auth/all-users", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return data;
+  }
+);
 const initialState = {
-  data: null,
-  status: "loading",
+  auth: { data: null, status: "loading" },
+  register: { data: null, status: "loading" },
+  allUsersData: { data: null, status: "loading" }
 };
 
 const authSlice = createSlice({
@@ -27,40 +38,52 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.data = null;
+      state.auth.data = null;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAuth.pending, (state) => {
-        state.status = "loading";
-        state.data = null;
+        state.auth.status = "loading";
+        state.auth.data = null;
       })
       .addCase(fetchAuth.fulfilled, (state, action) => {
-        state.status = "loaded";
-        state.data = action.payload;
+        state.auth.status = "loaded";
+        state.auth.data = action.payload;
       })
       .addCase(fetchAuth.rejected, (state) => {
-        state.status = "error";
-        state.data = null;
+        state.auth.status = "error";
+        state.auth.data = null;
       })
       .addCase(fetchRegister.pending, (state) => {
-        state.status = "loading";
-        state.data = null;
+        state.register.status = "loading";
+        state.register.data = null;
       })
       .addCase(fetchRegister.fulfilled, (state, action) => {
-        state.status = "loaded";
-        state.data = action.payload;
+        state.register.status = "loaded";
+        state.register.data = action.payload;
       })
       .addCase(fetchRegister.rejected, (state) => {
-        state.status = "error";
-        state.data = null;
+        state.register.status = "error";
+        state.register.data = null;
+      })
+      .addCase(fetchAllUsers.pending, (state) => {
+        state.allUsersData.status = "loading";
+        state.allUsersData.data = null;
+      })
+      .addCase(fetchAllUsers.fulfilled, (state, action) => {
+        state.allUsersData.status = "loaded";
+        state.allUsersData.data = action.payload;
+      })
+      .addCase(fetchAllUsers.rejected, (state) => {
+        state.allUsersData.status = "error";
+        state.allUsersData.data = null;
       });
   },
 });
 
 // Проверка авторизован ли пользователь
-export const selectIsAuth = (state: any) => Boolean(state.auth.data);
-export const selectUserData = (state: any) => state.auth.data;
+export const selectIsAuth = (state: any) => Boolean(state.auth.auth.data);
+export const selectUserData = (state: any) => state.auth.auth.data;
 export const authReducer = authSlice.reducer;
 export const { logout } = authSlice.actions;

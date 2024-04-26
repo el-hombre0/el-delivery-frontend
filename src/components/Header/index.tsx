@@ -8,7 +8,6 @@ import Cookies from "universal-cookie";
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
   const userData = useSelector(selectUserData);
-  console.log(userData);
   // const userName = useSelector((state: any) => {
   //   state.auth.data.firstName;
   // });
@@ -64,7 +63,25 @@ export const Header = () => {
               {isAuth && userData.role !== "USER" ? (
                 <li>
                   <Link to="/orders" className="nav-link">
-                    Заказы
+                    Все заказы
+                  </Link>
+                </li>
+              ) : (
+                <></>
+              )}
+              {isAuth && userData.role === "USER" ? (
+                <li>
+                  <Link to="/myorders" className="nav-link">
+                    Мои заказы
+                  </Link>
+                </li>
+              ) : (
+                <></>
+              )}
+              {isAuth && userData.role === "ADMIN" ? (
+                <li>
+                  <Link to="/users-list" className="nav-link">
+                    Список пользователей
                   </Link>
                 </li>
               ) : (

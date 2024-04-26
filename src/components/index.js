@@ -8,3 +8,5 @@ export * from "./CompletedOrder";
 export * from "./Account";
 export * from "./OneOrder";
 export * from "./MapBox";
+export * from "./MyOrders";
+export * from "./UsersList";

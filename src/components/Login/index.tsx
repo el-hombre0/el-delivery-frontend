@@ -17,7 +17,6 @@ export const Login = () => {
       alert("Не удалось авторизоваться! Повторите попытку.");
     } else {
       const decoded: any = jwtDecode(data.payload.token);
-      console.log(decoded);
       cookies.set("token", data.payload.token, {
         expires: new Date(decoded.exp * 1000),
       });
@@ -39,6 +38,7 @@ export const Login = () => {
   if (isAuth) {
     return <Navigate to="/" />;
   }
+  console.log("isAuth:", isAuth);
   return (
     <>
       <h3 className="text-center">Аутентификация</h3>
