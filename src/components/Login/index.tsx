@@ -26,8 +26,6 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    setError,
-    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       email: "stas@mail.ru",
@@ -38,7 +36,6 @@ export const Login = () => {
   if (isAuth) {
     return <Navigate to="/" />;
   }
-  console.log("isAuth:", isAuth);
   return (
     <>
       <h3 className="text-center">Аутентификация</h3>

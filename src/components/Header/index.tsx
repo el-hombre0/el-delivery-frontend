@@ -8,9 +8,6 @@ import Cookies from "universal-cookie";
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
   const userData = useSelector(selectUserData);
-  // const userName = useSelector((state: any) => {
-  //   state.auth.data.firstName;
-  // });
   const dispatch = useAppDispatch();
   const cookies = new Cookies();
   const onClickLogout = () => {
