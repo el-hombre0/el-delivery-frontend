@@ -10,4 +10,5 @@ export interface IOrder {
   address: string;
   cost: number;
   paymentMethod: string;
+  status: string;
 }

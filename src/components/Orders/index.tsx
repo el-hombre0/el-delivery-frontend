@@ -12,7 +12,7 @@ export const Orders = () => {
   useEffect(() => {
     dispatch(fetchOrders());
   }, []);
-
+  console.log("ordersList: ",ordersList);
   const isOrdersLoading = ordersList.status === "loading";
   const isOrdersError = ordersList.status === "error" && !isAuth;
   // const orderList = [
@@ -48,6 +48,7 @@ export const Orders = () => {
               <th>Адрес</th>
               <th>Стоимость</th>
               <th>Метод оплаты</th>
+              <th>Статус</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +57,7 @@ export const Orders = () => {
               : isOrdersLoading
               ? [...Array(5)]
               : ordersList.items.map((order: IOrder) => (
-                  <tr key={order.id}>
+                  <tr className={`${order.status === "PROCESSING" ? 'table-light' : order.status === "ACCEPTED" ? 'table-warning' : 'table-success'}`} key={order.id}>
                     <td>{order.id}</td>
                     <td>{order.clientName}</td>
                     <td>{order.clientSurname}</td>
@@ -68,6 +69,7 @@ export const Orders = () => {
                     <td>{order.address}</td>
                     <td>{order.cost}</td>
                     <td>{order.paymentMethod}</td>
+                    <td>{order.status}</td>
                   </tr>
                 ))}
             <tr></tr>
