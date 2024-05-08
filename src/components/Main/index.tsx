@@ -12,7 +12,7 @@ export const Main = () => {
       <h1 className="text-center">Главная страница</h1>
       {location.loaded
         ? JSON.stringify(location)
-        : "Location data is not available yet."}
+        : "Location data is not available yet. "}
       {location.loaded ? (
         <MapBox location={location} />
       ) : (
