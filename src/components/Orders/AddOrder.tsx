@@ -66,7 +66,6 @@ export const AddOrder = () => {
   };
   return (
     <div className="addOrder">
-      <h2>Создать заказ</h2>
       {isUserDataError ? (
         <></>
       ) : isUserDataLoading ? (

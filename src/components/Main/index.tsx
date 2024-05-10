@@ -18,16 +18,14 @@ export const Main = () => {
       ) : (
         "Location data is not available yet."
       )}
-      {isAuth && <AddOrder />}
+      <h4>Для создания заказа авторизуйтесь!</h4>
       <div className="d-flex">
-        <button type="button" className="btn btn-secondary">
-          Закрыть
-        </button>
         <button
           type="button"
           className="btn btn-primary"
-          data-toggle="modal"
-          data-target="#placeOrderModal"
+          data-bs-toggle="modal"
+          data-bs-target="#placeOrderModal"
+          disabled={!isAuth}
         >
           Заказать
         </button>
@@ -41,12 +39,21 @@ export const Main = () => {
       >
         <div className="modal-dialog">
           <div className="modal-content">
-            <div className="modal-header"></div>
-            <div className="modal-body"></div>
-            <div className="modal-footer"></div>
+            <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">Создать заказ</h5>
+            </div>
+            <div className="modal-body">
+            <AddOrder/>
+            </div>
+            <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        {/* <button type="button" className="btn btn-primary">Сохранить изменения</button> */}
+            </div>
           </div>
         </div>
       </div>
+      
+      
     </>
   );
 };

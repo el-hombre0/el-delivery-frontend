@@ -62,7 +62,7 @@ export const Login = () => {
               Пароль
             </label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="passwordInput"
               {...register("password", { required: "Укажите Ваш пароль" })}
