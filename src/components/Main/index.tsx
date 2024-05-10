@@ -40,7 +40,7 @@ export const Main = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">Создать заказ</h5>
+            <h5 className="modal-title" id="placeOrderModalLabel">Создать заказ</h5>
             </div>
             <div className="modal-body">
             <AddOrder/>

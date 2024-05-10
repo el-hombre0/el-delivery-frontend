@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export const Footer = () => {
   return (
     <>
@@ -5,32 +7,43 @@ export const Footer = () => {
         <footer className="bottom ">
           <ul className="nav justify-content-center border-bottom pb-3 mb-3">
             <li className="nav-item">
-              <a href="/" className="nav-link px-2 text-body-secondary">
+              <NavLink to="/" className="nav-link px-2 text-body-secondary">
                 Главная
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a href="/features" className="nav-link px-2 text-body-secondary">
+              <NavLink
+                to="/features"
+                className="nav-link px-2 text-body-secondary"
+              >
                 Особенности
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a href="/pricing" className="nav-link px-2 text-body-secondary">
+              <NavLink
+                to="/pricing"
+                className="nav-link px-2 text-body-secondary"
+              >
                 Цены
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a href="/faqs" className="nav-link px-2 text-body-secondary">
+              <NavLink to="/faqs" className="nav-link px-2 text-body-secondary">
                 FAQs
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a href="/about" className="nav-link px-2 text-body-secondary">
+              <NavLink
+                to="/about"
+                className="nav-link px-2 text-body-secondary"
+              >
                 О нас
-              </a>
+              </NavLink>
             </li>
           </ul>
-          <p className="text-center text-body-secondary">© 2024 El-Delivery, Efimtsev S.M.</p>
+          <p className="text-center text-body-secondary">
+            © 2024 El-Delivery, Efimtsev S.M.
+          </p>
         </footer>
       </div>
     </>

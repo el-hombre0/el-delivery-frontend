@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { selectIsAuth, selectUserData } from "../../redux/slices/auth";
 import { logout } from "../../redux/slices/auth";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
@@ -15,6 +15,10 @@ export const Header = () => {
       dispatch(logout());
       cookies.remove("token");
     }
+  };
+  const userWindowLocation = (searchString: string) => {
+    const res = window.location.href.search(searchString);
+    return res;
   };
   return (
     <>
@@ -33,53 +37,53 @@ export const Header = () => {
           <nav>
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <Link to="/" className="nav-link active" aria-current="page">
+                <NavLink to="/" className="nav-link" aria-current="page">
                   Главная
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/features" className="nav-link">
+                <NavLink to="/features" className="nav-link">
                   Особенности
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/pricing" className="nav-link">
+                <NavLink to="/pricing" className="nav-link">
                   Цены
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/faqs" className="nav-link">
+                <NavLink to="/faqs" className="nav-link">
                   FAQs
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/about" className="nav-link">
+                <NavLink to="/about" className="nav-link">
                   О нас
-                </Link>
+                </NavLink>
               </li>
               {isAuth && userData.role !== "USER" ? (
                 <li>
-                  <Link to="/orders" className="nav-link">
+                  <NavLink to="/orders" className="nav-link">
                     Все заказы
-                  </Link>
+                  </NavLink>
                 </li>
               ) : (
                 <></>
               )}
               {isAuth && userData.role === "USER" ? (
                 <li>
-                  <Link to="/myorders" className="nav-link">
+                  <NavLink to="/myorders" className="nav-link">
                     Мои заказы
-                  </Link>
+                  </NavLink>
                 </li>
               ) : (
                 <></>
               )}
               {isAuth && userData.role === "ADMIN" ? (
                 <li>
-                  <Link to="/users-list" className="nav-link">
+                  <NavLink to="/users-list" className="nav-link">
                     Список пользователей
-                  </Link>
+                  </NavLink>
                 </li>
               ) : (
                 <></>
@@ -90,14 +94,14 @@ export const Header = () => {
             {!isAuth ? (
               <>
                 <button type="button" className="btn btn-outline-primary m-2">
-                  <Link to="/login" className="nav-link">
+                  <NavLink to="/login" className="nav-link">
                     Войти
-                  </Link>
+                  </NavLink>
                 </button>
                 <button type="button" className="btn btn-primary">
-                  <Link to="/register" className="nav-link">
+                  <NavLink to="/register" className="nav-link">
                     Зарегистрироваться
-                  </Link>
+                  </NavLink>
                 </button>
               </>
             ) : (
