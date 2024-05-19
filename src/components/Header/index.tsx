@@ -16,15 +16,11 @@ export const Header = () => {
       cookies.remove("token");
     }
   };
-  const userWindowLocation = (searchString: string) => {
-    const res = window.location.href.search(searchString);
-    return res;
-  };
   return (
     <>
       <div className="container">
         <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-          <Link
+          <NavLink
             to="/"
             className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
           >
@@ -32,7 +28,7 @@ export const Header = () => {
               {/* <use xlink:href="#bootstrap"></use> */}
             </svg>
             <span className="fs-4">El-Delivery</span>
-          </Link>
+          </NavLink>
 
           <nav>
             <ul className="nav nav-pills">

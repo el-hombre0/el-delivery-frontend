@@ -1,7 +1,7 @@
 export const AddOrderForm = (props: any) => {
-    return (
-        <>
-        <form onSubmit={props.handleSubmit(props.onSubmit)}>
+  return (
+    <>
+      <form onSubmit={props.handleSubmit(props.onSubmit)}>
         <label className="form-label" htmlFor="fistNameInput">
           Имя
         </label>
@@ -84,6 +84,6 @@ export const AddOrderForm = (props: any) => {
           </button>
         </div>
       </form>
-        </>
-    )
-}
+    </>
+  );
+};

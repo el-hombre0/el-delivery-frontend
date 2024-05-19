@@ -34,7 +34,7 @@ export const AddOrder = () => {
   // }
   useEffect(() => {
     dispatch(fetchUserData()).then((data) => {
-      if (data) {
+      if (data.payload) {
         reset({
           clientName: data.payload.firstName,
           clientSurname: data.payload.lastName,

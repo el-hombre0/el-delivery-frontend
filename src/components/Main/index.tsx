@@ -10,15 +10,15 @@ export const Main = () => {
   return (
     <>
       <h1 className="text-center">Главная страница</h1>
-      {location.loaded
+      {/* {location.loaded
         ? JSON.stringify(location)
-        : "Location data is not available yet. "}
+        : "Location data is not available yet. "} */} 
       {location.loaded ? (
         <MapBox location={location} />
       ) : (
         "Location data is not available yet."
       )}
-      <h4>Для создания заказа авторизуйтесь!</h4>
+      {!isAuth && <h4>Для создания заказа авторизуйтесь!</h4>}
       <div className="d-flex">
         <button
           type="button"
@@ -40,20 +40,26 @@ export const Main = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-            <h5 className="modal-title" id="placeOrderModalLabel">Создать заказ</h5>
+              <h5 className="modal-title" id="placeOrderModalLabel">
+                Создать заказ
+              </h5>
             </div>
             <div className="modal-body">
-            <AddOrder/>
+              <AddOrder />
             </div>
             <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-        {/* <button type="button" className="btn btn-primary">Сохранить изменения</button> */}
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Закрыть
+              </button>
+              {/* <button type="button" className="btn btn-primary">Сохранить изменения</button> */}
             </div>
           </div>
         </div>
       </div>
-      
-      
     </>
   );
 };

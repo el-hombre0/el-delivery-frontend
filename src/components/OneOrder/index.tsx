@@ -4,12 +4,7 @@ export const OneOrder = (props: any) => {
   console.log("props: ", props);
   return (
     <div className="OneOrder">
-      <h1>Ваш заказ успешно оформлен!</h1>
-      <p>Бригада уже в пути</p>
-      <p>
-        Номер Вашего заказа:<b> {props.oneOrder.oneOrder.items.id}</b>
-      </p>
-      <h3>Данные заказа:</h3>
+      
       <table className="table">
         <thead>
           <tr>

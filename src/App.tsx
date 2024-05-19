@@ -11,6 +11,7 @@ import {
   MyOrders,
   UsersList,
 } from "./components";
+import { EditOrder } from "./components/Orders/EditOrder";
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
         <Route path="myorders" element={<MyOrders />}></Route>
         <Route path="account" element={<Account />}></Route>
         <Route path="users-list" element={<UsersList />}></Route>
+        <Route path="edit-order/:id" element={<EditOrder />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

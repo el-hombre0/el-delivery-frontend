@@ -21,8 +21,15 @@ export const CompletedOrder = () => {
 
   return (
     <div>
-      {!isOrderLoading && !isOrderError ? (
+      {!isOrderLoading && !isOrderError ? (<>
+        <h1>Ваш заказ успешно оформлен!</h1>
+        <p>Бригада уже в пути</p>
+        <p>
+          Номер Вашего заказа:<b> {oneOrder.oneOrder.items.id}</b>
+        </p>
+        <h3>Данные заказа:</h3>
         <OneOrder oneOrder={oneOrder} />
+        </>
       ) : !isAuth ? (
         <Navigate to="/login" />
       ) : (
