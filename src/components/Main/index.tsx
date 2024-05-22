@@ -12,14 +12,18 @@ export const Main = () => {
       <h1 className="text-center">Главная страница</h1>
       {/* {location.loaded
         ? JSON.stringify(location)
-        : "Location data is not available yet. "} */} 
-      {location.loaded ? (
-        <MapBox location={location} />
-      ) : (
-        "Location data is not available yet."
-      )}
-      {!isAuth && <h4>Для создания заказа авторизуйтесь!</h4>}
-      <div className="d-flex">
+        : "Location data is not available yet. "} */}
+      <div className="container-sm">
+        {location.loaded ? (
+          <MapBox location={location} />
+        ) : location.error ? (
+          `Location data is not available yet. ${location.error}`
+        ) : (
+          `Location data is not available yet.`
+        )}
+      </div>
+      <div className="container-md">
+        {!isAuth && <h4>Для создания заказа авторизуйтесь!</h4>}
         <button
           type="button"
           className="btn btn-primary"

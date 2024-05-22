@@ -1,5 +1,3 @@
-import { IOrder } from "../../types/order.types";
-
 export const OneOrder = (props: any) => {
   console.log("props: ", props);
   return (
