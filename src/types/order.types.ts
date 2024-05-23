@@ -12,3 +12,8 @@ export interface IOrder {
   paymentMethod: string;
   status: string;
 }
+
+export interface IPaymentMethodsOptions {
+  label: string;
+  value: string;
+}

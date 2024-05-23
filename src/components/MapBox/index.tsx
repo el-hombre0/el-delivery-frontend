@@ -14,7 +14,6 @@ export const MapBox = (props: any) => {
   const [lat, setLat] = useState(props.location.coordinates.lat);
   const [zoom, setZoom] = useState(9);
   const [userAddress, setUserAddress] = useState("");
-
   useEffect(() => {
     if (map.current) return; // initialize map only once
     setLng(props.location.coordinates.lng);
@@ -58,7 +57,14 @@ export const MapBox = (props: any) => {
         setUserAddress(data.payload);
       });
     }
-  }, [props.location.coordinates.lng, props.location.coordinates.lat, lng, lat, zoom, dispatch]);
+  }, [
+    props.location.coordinates.lng,
+    props.location.coordinates.lat,
+    lng,
+    lat,
+    zoom,
+    dispatch,
+  ]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/auth";
 import { useEffect } from "react";
@@ -9,6 +9,20 @@ import getToken from "../../services/getToken";
 import { fetchUserData } from "../../redux/slices/userData";
 import { AddOrderForm } from "./AddOrderForm";
 import useGeolocation from "../../hooks/useGeolocation";
+type FormValues = {
+  userId: number;
+  clientName: string;
+  clientSurname: string;
+  clientPhoneNumber: string;
+  clientEmail: string;
+  carModel: string;
+  requiredKiloWatts: number;
+  paymentMethod: string;
+  address: string;
+  distanceToClient: number;
+  lng: string;
+  lat: string;
+};
 export const AddOrder = () => {
   const isAuth = useSelector(selectIsAuth);
   const userData = useSelector((state: any) => state.userData.userData);
@@ -16,7 +30,10 @@ export const AddOrder = () => {
 
   const isUserDataLoading = userData.status === "loading";
   const isUserDataError = userData.status === "error" && !isAuth;
-  const { register, handleSubmit, reset } = useForm({
+  const userAddress = useSelector(
+    (state: any) => state.userAddress.userAddress
+  );
+  const { register, handleSubmit, reset, control } = useForm<FormValues>({
     // defaultValues: {
     //   clientName: "Сергей",
     //   clientSurname: "Осипов",
@@ -39,20 +56,21 @@ export const AddOrder = () => {
           clientName: data.payload.firstName,
           clientSurname: data.payload.lastName,
           clientEmail: data.payload.email,
+          clientPhoneNumber: data.payload.phoneNumber,
         });
       }
     });
   }, []);
   const navigate = useNavigate();
   const userLocation = useGeolocation();
-  const onSubmit = async (values: any) => {
+  const onSubmit: SubmitHandler<FormValues> = async (values) => {
     try {
-
       //TODO сделать отправку данных через fetch
       const token = getToken();
       values.lng = userLocation.coordinates.lng;
       values.lat = userLocation.coordinates.lat;
-      console.log("sended values: ", values);
+      values.address = userAddress.data;
+      values.distanceToClient = 0.0;
 
       const { data } = await instance.post("/orders", values, {
         headers: { Authorization: `Bearer ${token}` },
@@ -75,6 +93,7 @@ export const AddOrder = () => {
           onSubmit={onSubmit}
           register={register}
           handleSubmit={handleSubmit}
+          control={control}
         />
       )}
     </div>

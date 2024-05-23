@@ -1,4 +1,18 @@
+import { Controller } from "react-hook-form";
+import Select from "react-select";
+import { IPaymentMethodsOptions } from "../../types/order.types";
+
 export const AddOrderForm = (props: any) => {
+  const options: IPaymentMethodsOptions[] = [
+    {
+      label: "Наличные",
+      value: "CASH",
+    },
+    {
+      label: "Банковская карта",
+      value: "CARD",
+    },
+  ];
   return (
     <>
       <form onSubmit={props.handleSubmit(props.onSubmit)}>
@@ -31,8 +45,8 @@ export const AddOrderForm = (props: any) => {
           type="tel"
           className="form-control"
           id="phoneInput"
-          {...props.register("clientPhone")}
-          placeholder="89991112233"
+          {...props.register("clientPhoneNumber")}
+          placeholder="+79991112233"
           required
         ></input>
 
@@ -74,10 +88,33 @@ export const AddOrderForm = (props: any) => {
         <label className="form-label" htmlFor="paymentMethodInput">
           Метод оплаты
         </label>
-        <select id="paymentMethodInput" {...props.register("paymentMethod")}>
+        {/* <select id="paymentMethodInput" {...props.register("paymentMethod")}>
           <option>Наличные</option>
           <option>Банковская карта</option>
-        </select>
+        </select> */}
+        <Controller
+          control={props.control}
+          name="paymentMethod"
+          render={({
+            field: { onChange, value, ref },
+            fieldState: { error },
+          }) => {
+            return (
+              <div>
+                <Select
+                  ref={ref}
+                  id="paymentMethodInput"
+                  placeholder="Метод оплаты"
+                  options={options}
+                  value={options.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val?.value)}
+                  defaultValue={options[0]}
+                />
+              </div>
+            );
+          }}
+        />
+
         <div className="form-group mb-2 p-2">
           <button type="submit" className="btn btn-primary">
             Отправить заказ
