@@ -45,7 +45,7 @@ export const AddOrderForm = (props: any) => {
           type="tel"
           className="form-control"
           id="phoneInput"
-          {...props.register("clientPhoneNumber")}
+          {...props.register("clientPhone")}
           placeholder="+79991112233"
           required
         ></input>
@@ -116,7 +116,7 @@ export const AddOrderForm = (props: any) => {
         />
 
         <div className="form-group mb-2 p-2">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
             Отправить заказ
           </button>
         </div>

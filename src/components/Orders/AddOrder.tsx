@@ -13,7 +13,7 @@ type FormValues = {
   userId: number;
   clientName: string;
   clientSurname: string;
-  clientPhoneNumber: string;
+  clientPhone: string;
   clientEmail: string;
   carModel: string;
   requiredKiloWatts: number;
@@ -56,7 +56,7 @@ export const AddOrder = () => {
           clientName: data.payload.firstName,
           clientSurname: data.payload.lastName,
           clientEmail: data.payload.email,
-          clientPhoneNumber: data.payload.phoneNumber,
+          clientPhone: data.payload.phoneNumber,
         });
       }
     });
