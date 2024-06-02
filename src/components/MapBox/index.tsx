@@ -2,7 +2,15 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import { useRef, useEffect, useState } from "react";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
-import { fetchUserAddress } from "../../redux/slices/mapbox";
+import {
+  fetchDistanceToUser,
+  fetchUserAddress,
+} from "../../redux/slices/mapbox";
+
+const baseCoords = {
+  longitude: "55.713139",
+  latitude: "37.378278",
+};
 
 export const MapBox = (props: any) => {
   const dispatch = useAppDispatch();
@@ -14,6 +22,7 @@ export const MapBox = (props: any) => {
   const [lat, setLat] = useState(props.location.coordinates.lat);
   const [zoom, setZoom] = useState(9);
   const [userAddress, setUserAddress] = useState("");
+  const [distanceToUser, setDistanceToUser] = useState(null);
   useEffect(() => {
     if (map.current) return; // initialize map only once
     setLng(props.location.coordinates.lng);
@@ -45,7 +54,7 @@ export const MapBox = (props: any) => {
     });
 
     if (lng !== undefined && lat !== undefined) {
-      const config = {
+      const addressConfig = {
         params: {
           access_token: mapboxgl.accessToken,
           longitude: lng,
@@ -53,8 +62,21 @@ export const MapBox = (props: any) => {
           types: "address",
         },
       };
-      dispatch(fetchUserAddress(config)).then((data) => {
+      dispatch(fetchUserAddress(addressConfig)).then((data) => {
         setUserAddress(data.payload);
+      });
+      const distanceConfig = {
+        params: {
+          access_token: mapboxgl.accessToken,
+          waypoints_per_route: true,
+          // coordinates: [[lng, lat], [baseCoords]],
+        },
+        longitude: lng,
+        latitude: lat,
+        baseCoords,
+      };
+      dispatch(fetchDistanceToUser(distanceConfig)).then((data) => {
+        setDistanceToUser(data.payload);
       });
     }
   }, [

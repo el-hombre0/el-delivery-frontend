@@ -3,7 +3,7 @@ import { authReducer } from "./slices/auth";
 import { myOrdersReducer, ordersReducer } from "./slices/order";
 import { oneOrderReducer } from "./slices/oneOrder";
 import { userDataReducer } from "./slices/userData";
-import { userAddressReducer } from "./slices/mapbox";
+import { distanceToUserReducer, userAddressReducer } from "./slices/mapbox";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +13,7 @@ export const store = configureStore({
     userData: userDataReducer,
     myOrders: myOrdersReducer,
     userAddress: userAddressReducer,
+    distanceToUser: distanceToUserReducer,
   },
 });
 

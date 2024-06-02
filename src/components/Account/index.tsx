@@ -60,7 +60,7 @@ export const Account = () => {
   }
 
   return (
-    <div className="profile">
+    <div className="profile container">
       {!isLoading ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
