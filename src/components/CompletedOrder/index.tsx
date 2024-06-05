@@ -20,10 +20,10 @@ export const CompletedOrder = () => {
   console.log("oneOrder after useEffect", oneOrder);
 
   return (
-    <div>
+    <div className="container">
       {!isOrderLoading && !isOrderError ? (<>
         <h1>Ваш заказ успешно оформлен!</h1>
-        <p>Бригада уже в пути</p>
+        <p>Бригада уже в пути. Ожидаемое время прибытия <b></b></p>
         <p>
           Номер Вашего заказа:<b> {oneOrder.oneOrder.items.id}</b>
         </p>

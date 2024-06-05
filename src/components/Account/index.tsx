@@ -60,7 +60,7 @@ export const Account = () => {
   }
 
   return (
-    <div className="profile container">
+    <div className="profile container w-50">
       {!isLoading ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
@@ -99,21 +99,24 @@ export const Account = () => {
               placeholder={userEmail}
             ></input>
           </div>
-          <Controller
-            control={control}
-            name="role"
-            rules={{ required: "Роль обязательна!" }}
-            render={({ field: { onChange, value, name, ref } }) => (
-              <Select
-                ref={ref}
-                placeholder="Роли"
-                options={options}
-                value={options.find((c) => c.value === value)}
-                onChange={(val) => onChange(val?.value)}
-                defaultValue={{ label: userRole, value: userRole }}
-              />
-            )}
-          />
+          <div className="form-group">
+            <label htmlFor="role">Роль</label>
+            <Controller
+              control={control}
+              name="role"
+              rules={{ required: "Роль обязательна!" }}
+              render={({ field: { onChange, value, name, ref } }) => (
+                <Select
+                  ref={ref}
+                  placeholder="Роли"
+                  options={options}
+                  value={options.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val?.value)}
+                  defaultValue={{ label: userRole, value: userRole }}
+                />
+              )}
+            />
+          </div>
           <button type="submit" disabled={!isDirty} className="btn btn-success">
             Применить изменения
           </button>

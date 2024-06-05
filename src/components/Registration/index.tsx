@@ -31,12 +31,12 @@ export const Registration = () => {
     setError,
     formState: { errors, isValid },
   } = useForm({
-    defaultValues: {
-      firstName: "Стас",
-      lastName: "Ефимцев",
-      email: "newstas@mail.ru",
-      password: "1234ASD",
-    },
+    // defaultValues: {
+    //   firstName: "Стас",
+    //   lastName: "Ефимцев",
+    //   email: "newstas@mail.ru",
+    //   password: "1234ASD",
+    // },
     mode: "onChange",
   });
   if (isAuth) {
@@ -45,7 +45,7 @@ export const Registration = () => {
   return (
     <>
       <h3 className="text-center">Регистрация</h3>
-      <div className="container w-25">
+      <div className="container w-50">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group mb-1 p-2">
             <label className="form-label" htmlFor="nameInput">

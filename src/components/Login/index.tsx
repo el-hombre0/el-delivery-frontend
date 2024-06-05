@@ -23,14 +23,11 @@ export const Login = () => {
     }
   };
 
-  const {
-    register,
-    handleSubmit,
-  } = useForm({
-    defaultValues: {
-      email: "stas@mail.ru",
-      password: "1234ASD",
-    },
+  const { register, handleSubmit } = useForm({
+    // defaultValues: {
+    //   email: "stas@mail.ru",
+    //   password: "1234ASD",
+    // },
     mode: "onChange",
   });
   if (isAuth) {
@@ -39,7 +36,7 @@ export const Login = () => {
   return (
     <>
       <h3 className="text-center">Аутентификация</h3>
-      <div className="container w-25">
+      <div className="container w-50">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group mb-1 p-2">
             <label className="form-label" htmlFor="loginInput">
