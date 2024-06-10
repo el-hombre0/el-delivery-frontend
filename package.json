@@ -30,6 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "startwp": "webpack serve",
     "build": "webpack",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -11,13 +11,13 @@ export const CompletedOrder = () => {
   const isAuth = useSelector(selectIsAuth);
   const { id } = useParams();
   const oneOrder = useSelector((state: any) => state.oneOrder);
-
+  // const routeDuration = useSelector((state: any) => state.routeInfo.routes[0].duration)
   useEffect(() => {
     dispatch(fetchOneOrder(id));
+    // console.log("routeDuration: ", routeDuration)
   }, []);
   const isOrderLoading = oneOrder.status === "loading";
   const isOrderError = oneOrder.status === "error" || !isAuth;
-  console.log("oneOrder after useEffect", oneOrder);
 
   return (
     <div className="container">

@@ -5,23 +5,24 @@ import { selectIsAuth, fetchRegister } from "../../redux/slices/auth";
 import { jwtDecode } from "jwt-decode";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
+import { useState } from "react";
 
 export const Registration = () => {
   const dispatch = useAppDispatch();
-  const isAuth = useSelector(selectIsAuth);
   const cookies = new Cookies();
+  const [registered, setRegistered] = useState(false);
 
   const onSubmit = async (values: any) => {
-    console.log(values);
     const data = await dispatch(fetchRegister(values));
     if (!data.payload || !("token" in data.payload)) {
       alert("Не удалось зарегистрироваться! Повторите попытку.");
     } else {
       const decoded: any = jwtDecode(data.payload.token);
-      console.log(decoded);
       cookies.set("token", data.payload.token, {
         expires: new Date(decoded.exp * 1000),
       });
+      alert("Успешная регистрация! Войдите в аккаунт.");
+      setRegistered(true);
     }
   };
 
@@ -39,7 +40,7 @@ export const Registration = () => {
     // },
     mode: "onChange",
   });
-  if (isAuth) {
+  if (registered) {
     return <Navigate to="/" />;
   }
   return (
@@ -76,7 +77,22 @@ export const Registration = () => {
               {...register("lastName", { required: "Укажите Вашу фамилию." })}
               placeholder="Фамилия"
               required
-              autoFocus
+            />
+          </div>
+          <div className="form-group mb-1 p-2">
+            <label className="form-label" htmlFor="nameInput">
+              Номер телефона
+            </label>
+
+            <input
+              type="text"
+              className="form-control"
+              id="phoneNumberInput"
+              {...register("phoneNumber", {
+                required: "Укажите Ваш номер телефона.",
+              })}
+              placeholder="+79998887766"
+              required
             />
           </div>
 

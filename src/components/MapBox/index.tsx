@@ -3,7 +3,7 @@ import mapboxgl from "mapbox-gl";
 import { useRef, useEffect, useState } from "react";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
 import {
-  fetchDistanceToUser,
+  fetchRouteInfo,
   fetchUserAddress,
 } from "../../redux/slices/mapbox";
 
@@ -23,6 +23,7 @@ export const MapBox = (props: any) => {
   const [zoom, setZoom] = useState(9);
   const [userAddress, setUserAddress] = useState("");
   const [distanceToUser, setDistanceToUser] = useState(null);
+  const [drivingDuration, setDrivingDuration] = useState(null);
   useEffect(() => {
     if (map.current) return; // initialize map only once
     setLng(props.location.coordinates.lng);
@@ -65,7 +66,7 @@ export const MapBox = (props: any) => {
       dispatch(fetchUserAddress(addressConfig)).then((data) => {
         setUserAddress(data.payload);
       });
-      const distanceConfig = {
+      const routeConfig = {
         params: {
           access_token: mapboxgl.accessToken,
           waypoints_per_route: true,
@@ -75,8 +76,9 @@ export const MapBox = (props: any) => {
         latitude: lat,
         baseCoords,
       };
-      dispatch(fetchDistanceToUser(distanceConfig)).then((data) => {
-        setDistanceToUser(data.payload);
+      dispatch(fetchRouteInfo(routeConfig)).then((data) => {
+        setDistanceToUser(data.payload.routes[0].distance);
+        setDrivingDuration(data.payload.routes[0].duration)
       });
     }
   }, [
@@ -91,9 +93,9 @@ export const MapBox = (props: any) => {
   return (
     <>
       <div className="sidebar">
-        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+        Долгота (Longitude): {lng} | Широта (Latitude): {lat} | Зум: {zoom}
       </div>
-      <div> Your address: {userAddress}</div>
+      <div> Ваш адрес: {userAddress}</div>
       <div ref={mapContainer} className="map-container" />
     </>
   );
