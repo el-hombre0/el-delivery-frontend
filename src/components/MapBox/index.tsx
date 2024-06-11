@@ -2,10 +2,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import { useRef, useEffect, useState } from "react";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
-import {
-  fetchRouteInfo,
-  fetchUserAddress,
-} from "../../redux/slices/mapbox";
+import { fetchRouteInfo, fetchUserAddress } from "../../redux/slices/mapbox";
 
 const baseCoords = {
   longitude: "55.713139",
@@ -48,6 +45,13 @@ export const MapBox = (props: any) => {
       "top-right"
     );
 
+    const popup = new mapboxgl.Popup({ offset: [0, -15] })
+      .setLngLat({ lng: 37.378278, lat: 55.713139 })
+      .setHTML(
+        `<h4>El-Delivery - Мы здесь!</h4><p>пос. Немчиновка, 3, Новоивановское, Московская обл., 143025</p>`
+      )
+      .addTo(map.current);
+
     map.current.on("move", () => {
       setLng(map.current.getCenter().lng.toFixed(4));
       setLat(map.current.getCenter().lat.toFixed(4));
@@ -78,7 +82,7 @@ export const MapBox = (props: any) => {
       };
       dispatch(fetchRouteInfo(routeConfig)).then((data) => {
         setDistanceToUser(data.payload.routes[0].distance);
-        setDrivingDuration(data.payload.routes[0].duration)
+        setDrivingDuration(data.payload.routes[0].duration);
       });
     }
   }, [
