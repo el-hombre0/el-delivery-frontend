@@ -10,3 +10,7 @@ export * from "./OneOrder";
 export * from "./MapBox";
 export * from "./MyOrders";
 export * from "./UsersList";
+export * from "./Features";
+export * from "./Pricing";
+export * from "./FAQs";
+export * from "./About";
