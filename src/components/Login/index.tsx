@@ -48,7 +48,7 @@ export const Login = () => {
               className="form-control"
               id="loginInput"
               {...register("email", { required: "Укажите Ваш E-mail" })}
-              placeholder="E-mail"
+              placeholder="ivanov@mail.ru"
               required
               autoFocus
             />

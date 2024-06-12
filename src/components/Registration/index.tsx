@@ -57,7 +57,7 @@ export const Registration = () => {
               className="form-control"
               id="firstNameInput"
               {...register("firstName", { required: "Укажите Ваше имя." })}
-              placeholder="Имя"
+              placeholder="Иван"
               required
               autoFocus
             />
@@ -75,7 +75,7 @@ export const Registration = () => {
               className="form-control"
               id="lastNameInput"
               {...register("lastName", { required: "Укажите Вашу фамилию." })}
-              placeholder="Фамилия"
+              placeholder="Иванов"
               required
             />
           </div>
@@ -106,7 +106,7 @@ export const Registration = () => {
               className="form-control"
               id="loginInput"
               {...register("email", { required: "Укажите Ваш e-mail." })}
-              placeholder="E-mail"
+              placeholder="ivanov@mail.ru"
               required
             />
           </div>
@@ -116,7 +116,7 @@ export const Registration = () => {
               Пароль
             </label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="passwordInput"
               {...register("password", { required: "Укажите Ваш пароль." })}

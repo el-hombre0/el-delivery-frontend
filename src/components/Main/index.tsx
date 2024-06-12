@@ -17,9 +17,9 @@ export const Main = () => {
         {location.loaded ? (
           <MapBox location={location} />
         ) : location.error ? (
-          `Location data is not available yet. ${location.error}`
+          `Данные геопозиции пока недоступны. Повторите попытку позже. ${location.error}`
         ) : (
-          `Location data is not available yet.`
+          `Данные геопозиции пока недоступны. Повторите попытку позже.`
         )}
       </div>
       <div className="container-md">
