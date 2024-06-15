@@ -5,8 +5,8 @@ import { useAppDispatch } from "../../hooks/useTypedDispatch";
 import { fetchRouteInfo, fetchUserAddress } from "../../redux/slices/mapbox";
 
 const baseCoords = {
-  longitude: "55.713139",
-  latitude: "37.378278",
+  longitude: "37.378278",
+  latitude: "55.713139",
 };
 
 export const MapBox = (props: any) => {
@@ -19,10 +19,9 @@ export const MapBox = (props: any) => {
   const [lat, setLat] = useState(props.location.coordinates.lat);
   const [zoom, setZoom] = useState(9);
   const [userAddress, setUserAddress] = useState("");
-  const [distanceToUser, setDistanceToUser] = useState(null);
-  const [drivingDuration, setDrivingDuration] = useState(null);
+
   useEffect(() => {
-    if (map.current) return; // initialize map only once
+    if (map.current) return;
     setLng(props.location.coordinates.lng);
     setLat(props.location.coordinates.lat);
     map.current = new mapboxgl.Map({
@@ -37,9 +36,7 @@ export const MapBox = (props: any) => {
         positionOptions: {
           enableHighAccuracy: true,
         },
-        // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
-        // Draw an arrow next to the location dot to indicate which direction the device is heading.
         showUserHeading: true,
       }),
       "top-right"
@@ -74,16 +71,12 @@ export const MapBox = (props: any) => {
         params: {
           access_token: mapboxgl.accessToken,
           waypoints_per_route: true,
-          // coordinates: [[lng, lat], [baseCoords]],
         },
         longitude: lng,
         latitude: lat,
         baseCoords,
       };
-      dispatch(fetchRouteInfo(routeConfig)).then((data) => {
-        setDistanceToUser(data.payload.routes[0].distance);
-        setDrivingDuration(data.payload.routes[0].duration);
-      });
+      dispatch(fetchRouteInfo(routeConfig));
     }
   }, [
     props.location.coordinates.lng,

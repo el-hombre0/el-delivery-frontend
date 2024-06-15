@@ -13,18 +13,15 @@ export const fetchUserAddress = createAsyncThunk(
   }
 );
 
-// Получение расстояния от базы до пользователя
+// Получение данных маршрута от базы до пользователя
 export const fetchRouteInfo = createAsyncThunk(
   "mapbox/fetchRouteInfo",
   async (params: any) => {
-    console.log("params:", params);
     const { data } = await axios.get(
       `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${params.longitude},${params.latitude};${params.baseCoords.longitude},${params.baseCoords.latitude}/`,
-      // `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/`,
       params
     );
-    console.log("data: ", data);
-    return data;
+    return data.routes[0];
   }
 );
 

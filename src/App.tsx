@@ -1,21 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Registration,
-  Login,
+  Authentication,
   Orders,
   Main,
   Header,
   Footer,
-  CompletedOrder,
   Account,
-  MyOrders,
   UsersList,
   Features,
   Faqs,
   Pricing,
   About,
+  EditOrder,
+  CompletedOrder,
+  MyOrders
 } from "./components";
-import { EditOrder } from "./components/Orders/EditOrder";
 function App() {
   return (
     <BrowserRouter>
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="register" element={<Registration />}></Route>
-        <Route path="login" element={<Login />}></Route>
+        <Route path="login" element={<Authentication />}></Route>
         <Route path="orders" element={<Orders />}></Route>
         <Route path="orders/:id" element={<CompletedOrder />}></Route>
         <Route path="myorders" element={<MyOrders />}></Route>

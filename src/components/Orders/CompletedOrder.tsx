@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../hooks/useTypedDispatch";
 import { fetchOneOrder } from "../../redux/slices/oneOrder";
 import { selectIsAuth } from "../../redux/slices/auth";
-import { OneOrder } from "../OneOrder";
+import { OneOrder } from "./OneOrder";
 
 export const CompletedOrder = () => {
   const dispatch = useAppDispatch();

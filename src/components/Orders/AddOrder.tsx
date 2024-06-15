@@ -9,23 +9,12 @@ import getToken from "../../services/getToken";
 import { fetchUserData } from "../../redux/slices/userData";
 import { AddOrderForm } from "./AddOrderForm";
 import useGeolocation from "../../hooks/useGeolocation";
-type FormValues = {
-  userId: number;
-  clientName: string;
-  clientSurname: string;
-  clientPhone: string;
-  clientEmail: string;
-  carModel: string;
-  requiredKiloWatts: number;
-  paymentMethod: string;
-  address: string;
-  distanceToClient: number;
-  lng: string;
-  lat: string;
-};
+import { addOrderFormValues } from "../../types/addOrderFormValues.types";
+
 export const AddOrder = () => {
   const isAuth = useSelector(selectIsAuth);
   const userData = useSelector((state: any) => state.userData.userData);
+  const routeInfo = useSelector((state: any)=> state.routeInfo.routeInfo)
   const dispatch = useAppDispatch();
 
   const isUserDataLoading = userData.status === "loading";
@@ -33,7 +22,7 @@ export const AddOrder = () => {
   const userAddress = useSelector(
     (state: any) => state.userAddress.userAddress
   );
-  const { register, handleSubmit, reset, control } = useForm<FormValues>({
+  const { register, handleSubmit, reset, control } = useForm<addOrderFormValues>({
     // defaultValues: {
     //   clientName: "Сергей",
     //   clientSurname: "Осипов",
@@ -63,15 +52,18 @@ export const AddOrder = () => {
   }, []);
   const navigate = useNavigate();
   const userLocation = useGeolocation();
-  const onSubmit: SubmitHandler<FormValues> = async (values) => {
+  const onSubmit: SubmitHandler<addOrderFormValues> = async (values) => {
     try {
       //TODO сделать отправку данных через fetch
       const token = getToken();
       values.lng = userLocation.coordinates.lng;
       values.lat = userLocation.coordinates.lat;
       values.address = userAddress.data;
-      values.distanceToClient = 0.0;
-
+      if(routeInfo.status === 'loaded'){
+        console.log('routeInfo:', routeInfo);
+        values.distanceToClient = Math.round(routeInfo.data.distance / 1000);
+      }
+      console.log("values.distanceToClient: ", values.distanceToClient)
       const { data } = await instance.post("/orders", values, {
         headers: { Authorization: `Bearer ${token}` },
       });
