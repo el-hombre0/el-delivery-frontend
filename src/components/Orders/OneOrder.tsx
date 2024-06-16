@@ -19,17 +19,17 @@ export const OneOrder = (props: any) => {
           </tr>
         </thead>
         <tbody>
-          <tr key={props.oneOrder.oneOrder.items.id}>
-            <td>{props.oneOrder.oneOrder.items.clientName}</td>
-            <td>{props.oneOrder.oneOrder.items.clientSurname}</td>
-            <td>{props.oneOrder.oneOrder.items.clientPhone}</td>
-            <td>{props.oneOrder.oneOrder.items.clientEmail}</td>
-            <td>{props.oneOrder.oneOrder.items.carModel}</td>
-            <td>{props.oneOrder.oneOrder.items.requiredKiloWatts}</td>
-            <td>{props.oneOrder.oneOrder.items.distanceToClient}</td>
-            <td>{props.oneOrder.oneOrder.items.address}</td>
-            <td>{props.oneOrder.oneOrder.items.cost}</td>
-            <td>{props.oneOrder.oneOrder.items.paymentMethod}</td>
+          <tr key={props.oneOrder.items.id}>
+            <td>{props.oneOrder.items.clientName}</td>
+            <td>{props.oneOrder.items.clientSurname}</td>
+            <td>{props.oneOrder.items.clientPhone}</td>
+            <td>{props.oneOrder.items.clientEmail}</td>
+            <td>{props.oneOrder.items.carModel}</td>
+            <td>{props.oneOrder.items.requiredKiloWatts}</td>
+            <td>{props.oneOrder.items.distanceToClient}</td>
+            <td>{props.oneOrder.items.address}</td>
+            <td>{props.oneOrder.items.cost}</td>
+            <td>{props.oneOrder.items.paymentMethod}</td>
           </tr>
           <tr></tr>
         </tbody>

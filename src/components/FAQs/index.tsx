@@ -105,8 +105,8 @@ export const Faqs = () => {
       </div>
       <p>
         При возникновении дополнительных вопросов можете написать их на
-        электронную почту нашим специалистам:{" "}
-        <Link to="mailto:evencofr@yandex.ru">evencofr@yandex.ru</Link>
+        электронную почту нашим специалистам:
+        <Link to="mailto:evencofr@gmail.com">evencofr@gmail.com</Link>
       </p>
     </div>
   );
